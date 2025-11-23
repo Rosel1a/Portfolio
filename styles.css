@@ -1,0 +1,82 @@
+:root{
+  --max-w:1100px;
+  --accent:#0b5fff;
+  --bg:#f6f7fb;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --radius:12px;
+  --gap:18px;
+  --nav-width:220px;
+  --nav-gap:8px;
+  --shadow: 0 8px 30px rgba(17,24,39,0.06);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;background:var(--bg);color:#111;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:var(--max-w);margin:0 auto;padding:40px 20px}
+
+/* Header */
+.site-header{position:relative;padding:28px 0}
+.header-inner{display:flex;align-items:center;justify-content:center;gap:20px}
+.site-title{margin:0;font-size:1.6rem;font-weight:700;letter-spacing:-0.2px}
+
+/* Right-side vertical nav (fixed) */
+.nav-list{
+  list-style:none;margin:0;padding:12px;display:flex;flex-direction:column;gap:var(--nav-gap);
+  position:fixed;right:20px;top:50%;transform:translateY(-50%);
+  background:var(--card);border-radius:14px;padding:14px;box-shadow:var(--shadow);min-width:160px;
+  z-index:60;
+}
+.nav-list li{margin:0}
+.nav-list a{
+  display:block;padding:10px 14px;border-radius:10px;color:#111;font-weight:600;
+  background:transparent;border:1px solid transparent;
+}
+.nav-list a:hover,
+.nav-list a:focus{
+  background:linear-gradient(90deg, rgba(11,95,255,0.08), rgba(11,95,255,0.04));
+  border-color:rgba(11,95,255,0.12);outline:none;
+}
+
+/* Page sections */
+.section{background:var(--card);border-radius:12px;padding:28px;margin-bottom:20px;box-shadow:var(--shadow)}
+.section h2{margin-top:0}
+.projects-list{padding-left:1rem;margin:0}
+.projects-list li{margin:10px 0;color:var(--muted)}
+
+/* Contact form */
+.contact-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.contact-form label{display:block}
+.contact-form input,
+.contact-form textarea{
+  width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;background:transparent;color:#111;font-size:0.95rem;
+}
+.contact-form textarea{grid-column:1/-1;resize:vertical;min-height:120px}
+.contact-form button{
+  grid-column:1/-1;justify-self:start;padding:10px 16px;border-radius:10px;border:0;background:var(--accent);color:#fff;font-weight:700;cursor:pointer;
+  box-shadow:0 6px 20px rgba(11,95,255,0.16);
+}
+
+/* Footer */
+.site-footer{padding:24px 0;text-align:center;color:var(--muted);font-size:0.9rem}
+
+/* Accessibility helper */
+.visually-hidden{position:absolute !important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+
+/* Responsive: collapse nav to top on small screens */
+@media (max-width:880px){
+  .nav-list{
+    position:fixed;right:0;left:0;top:0;transform:none;border-radius:0;display:flex;flex-direction:row;justify-content:center;
+    padding:8px 12px;gap:10px;min-width:unset;
+  }
+  body{padding-top:64px} /* avoid content under top nav */
+  .header-inner{justify-content:flex-start}
+  .contact-form{grid-template-columns:1fr; }
+}
+
+/* Very small screens: make nav compact */
+@media (max-width:420px){
+  .nav-list a{padding:8px 10px;font-size:0.95rem}
+  .container{padding:20px 12px}
+}
