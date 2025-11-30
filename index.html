@@ -7,45 +7,142 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- ============================================
+       HEADER SECTION - Hero with title & subtitle
+       ============================================ -->
   <header class="site-header">
+    <!-- Animated background with floating blobs -->
+    <div class="header-bg"></div>
+    
     <div class="container header-inner">
-      <h1 class="site-title">Ruusu Aavikko</h1>
-      <nav aria-label="Main navigation">
-        <ul class="nav-list">
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#cv">CV</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+      <div class="header-content">
+        <h1 class="site-title">Ruusu Aavikko</h1>
+        <p class="header-subtitle">Master's Student | Future Game Developer</p>
+      </div>
     </div>
   </header>
 
+  <!-- ============================================
+       FIXED SIDE NAVIGATION - Stays visible while scrolling
+       ============================================ -->
+  <nav aria-label="Main navigation">
+    <ul class="nav-list">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#cv">CV</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============================================
+       MAIN CONTENT - All page sections
+       ============================================ -->
   <main class="container">
+    
+    <!-- ABOUT SECTION -->
     <section id="about" class="section">
       <h2>About Me</h2>
-      <p>Welcome to my portfolio. I'm Ruusu Aavikko — a master's degree student in Computer Science.</p>
+      <p>Welcome to my portfolio. I'm Ruusu Aavikko and I'm a master's degree student in Computer Science. 
+        I have a strong passion for game development and web technologies, and I enjoy creating interactive and engaging experiences.
+        Here, you'll find a selection of my projects that showcase my skills and interests in these areas.
+      </p>
     </section>
 
+    <!-- SKILLS SECTION - Grid of skill boxes with icons -->
+    <section id="skills" class="section">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <!-- Each skill box displays an icon, title, and description -->
+        <div class="skill-box">
+          <span class="skill-icon">🎮</span>
+          <h3>C#</h3>
+          <p>Game development with Unity</p>
+        </div>
+        <div class="skill-box">
+          <span class="skill-icon">🌐</span>
+          <h3>JavaScript</h3>
+          <p>Web development & interactivity</p>
+        </div>
+        <div class="skill-box">
+          <span class="skill-icon">🎨</span>
+          <h3>Figma</h3>
+          <p>UI/UX design & prototyping</p>
+        </div>
+        <div class="skill-box">
+          <span class="skill-icon">🗄️</span>
+          <h3>SQL</h3>
+          <p>Database design & queries</p>
+        </div>
+        <div class="skill-box">
+          <span class="skill-icon">🐍</span>
+          <h3>Python</h3>
+          <p>Data & backend scripting</p>
+        </div>
+        <div class="skill-box">
+          <span class="skill-icon">📱</span>
+          <h3>HTML & CSS</h3>
+          <p>Web design & styling</p>
+        </div>
+        <div class="skill-box">
+          <span class="skill-icon">☕</span>
+          <h3>Java</h3>
+          <p>Object-oriented programming</p>
+        </div>
+        <div class="skill-box">
+          <span class="skill-icon">🐙</span>
+          <h3>GitHub</h3>
+          <p>Version control & collaboration</p>
+        </div>
+        <div class="skill-box">
+          <span class="skill-icon">🖼️</span>
+          <h3>Canva</h3>
+          <p>Graphic design & content creation</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION - Showcase of work with images -->
     <section id="projects" class="section">
       <h2>Projects</h2>
       <ul class="projects-list">
-        <li><strong>Project 1</strong> — short description of project 1.</li>
-        <li><strong>Project 2</strong> — short description of project 2.</li>
-        <li><strong>Project 3</strong> — short description of project 3.</li>
+        <!-- Each project item contains an image and description -->
+        <li class="project-item">
+          <img src="https://via.placeholder.com/400x250?text=Project+1" alt="Project 1 screenshot" class="project-image">
+          <div class="project-content">
+            <strong>Project 1</strong>
+            <p>A Unity 2D combat sandbox featuring melee and projectile attacks, equipping/pickups, simple aiming, and damage handling.</p>
+          </div>
+        </li>
+        <li class="project-item">
+          <img src="https://via.placeholder.com/400x250?text=Oppimispeli" alt="Oppimispeli screenshot" class="project-image">
+          <div class="project-content">
+            <strong>Oppimispeli</strong>
+            <p>Oppimispeli is a web-based learning game / practice system designed to provide learners with an interactive platform for studying and training.</p>
+          </div>
+        </li>
+        <li class="project-item">
+          <img src="https://via.placeholder.com/400x250?text=Project+3" alt="Project 3 screenshot" class="project-image">
+          <div class="project-content">
+            <strong>Project 3</strong>
+            <p>Short description of project 3.</p>
+          </div>
+        </li>
       </ul>
     </section>
 
+    <!-- CV SECTION - Download resume -->
     <section id="cv" class="section">
       <h2>CV</h2>
       <p>You can download my CV <a href="cv.pdf" download>here (PDF)</a>.</p>
     </section>
 
+    <!-- CONTACT SECTION - Contact info & form -->
     <section id="contact" class="section">
       <h2>Contact</h2>
-      <p>Email: <a href="mailto:mail@mail.com">mail@mail.com</a></p>
+      <p>Email: <a href="mailto:ruusu.aavikko@gmail.com">ruusu.aavikko@gmail.com</a></p>
 
-      <!-- Contact form -->
+      <!-- Contact form with email, name, and message fields -->
       <form class="contact-form" action="#" method="post" novalidate>
         <label>
           <span class="visually-hidden">Name</span>
@@ -64,13 +161,20 @@
     </section>
   </main>
 
+  <!-- ============================================
+       FOOTER - Copyright info
+       ============================================ -->
   <footer class="site-footer">
     <div class="container">
       <small>© <span id="year"></span> Ruusu Aavikko — All rights reserved.</small>
     </div>
   </footer>
 
+  <!-- ============================================
+       SCRIPTS - Dynamic year in footer
+       ============================================ -->
   <script>
+    // Automatically updates the year in footer to current year
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>

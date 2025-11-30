@@ -1,82 +1,342 @@
+/* ============================================
+   CSS VARIABLES - Define all colors, sizes, and animations
+   ============================================ */
 :root{
   --max-w:1100px;
-  --accent:#0b5fff;
-  --bg:#f6f7fb;
-  --card:#ffffff;
-  --muted:#6b7280;
+  --accent:#ff006e;
+  --accent-dark:#c2185b;
+  --bg:#0a0e27;
+  --card:#1a1f3a;
+  --card-hover:#252d48;
+  --text-primary:#ffffff;
+  --text-secondary:#a0aec0;
+  --border:#2d3748;
   --radius:12px;
   --gap:18px;
-  --nav-width:220px;
-  --nav-gap:8px;
-  --shadow: 0 8px 30px rgba(17,24,39,0.06);
+  --shadow-sm: 0 2px 8px rgba(255,0,110,0.1);
+  --shadow: 0 8px 30px rgba(255,0,110,0.15);
+  --shadow-lg: 0 12px 48px rgba(255,0,110,0.2);
 }
 
+/* ============================================
+   GLOBAL STYLES - Applied to entire page
+   ============================================ */
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;background:var(--bg);color:#111;-webkit-font-smoothing:antialiased}
-a{color:var(--accent);text-decoration:none}
+html,body{
+  height:100%;margin:0;
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background:var(--bg);color:var(--text-primary);-webkit-font-smoothing:antialiased;line-height:1.6;
+}
+
+/* Links styling with hover effects */
+a{color:var(--accent);text-decoration:none;transition:color 0.2s ease}
+a:hover{color:#ff3385}
+
+/* Container - Centers content and sets max width */
 .container{max-width:var(--max-w);margin:0 auto;padding:40px 20px}
 
-/* Header */
-.site-header{position:relative;padding:28px 0}
-.header-inner{display:flex;align-items:center;justify-content:center;gap:20px}
-.site-title{margin:0;font-size:1.6rem;font-weight:700;letter-spacing:-0.2px}
+/* ============================================
+   HEADER SECTION - Hero area with animated background
+   ============================================ */
+.site-header{
+  position:relative;overflow:hidden;padding:60px 0;
+}
 
-/* Right-side vertical nav (fixed) */
+/* Background gradient layer */
+.header-bg{
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  background:linear-gradient(135deg, rgba(255,0,110,0.1) 0%, rgba(194,24,91,0.05) 50%, transparent 100%);
+  z-index:0;
+}
+
+/* Animated floating blob 1 (top right) */
+.header-bg::before{
+  content:'';position:absolute;top:-50%;right:-20%;width:500px;height:500px;
+  background:radial-gradient(circle, rgba(255,0,110,0.15) 0%, transparent 70%);border-radius:50%;
+  animation:float 8s ease-in-out infinite;
+}
+
+/* Animated floating blob 2 (bottom left) */
+.header-bg::after{
+  content:'';position:absolute;bottom:-30%;left:-10%;width:400px;height:400px;
+  background:radial-gradient(circle, rgba(255,0,110,0.08) 0%, transparent 70%);border-radius:50%;
+  animation:float 10s ease-in-out infinite reverse;
+}
+
+/* Float animation - moves blobs up and down smoothly */
+@keyframes float{
+  0%, 100%{transform:translateY(0px)}
+  50%{transform:translateY(30px)}
+}
+
+/* Header content flexbox layout */
+.header-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:40px;
+  position:relative;z-index:1;
+}
+
+.header-content{
+  flex:1;
+}
+
+/* Main title with gradient text and animation */
+.site-title{
+  margin:0 0 12px 0;font-size:3.5rem;font-weight:900;letter-spacing:-1px;
+  background:linear-gradient(135deg, #ff006e 0%, #ff3385 50%, #ff6bb5 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  text-shadow:0 8px 30px rgba(255,0,110,0.2);
+  animation:fadeInDown 0.8s ease-out;
+}
+
+/* Subtitle text under title */
+.header-subtitle{
+  margin:0;font-size:1.2rem;color:var(--text-secondary);font-weight:500;
+  animation:fadeInUp 0.8s ease-out 0.2s both;
+}
+
+/* Fade in down animation - title slides in from top */
+@keyframes fadeInDown{
+  from{opacity:0;transform:translateY(-30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Fade in up animation - subtitle slides in from bottom */
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Hide navigation from header on desktop */
+.header-inner .nav-list{
+  display:none;
+}
+
+/* ============================================
+   FIXED SIDE NAVIGATION - Stays visible while scrolling
+   ============================================ */
 .nav-list{
-  list-style:none;margin:0;padding:12px;display:flex;flex-direction:column;gap:var(--nav-gap);
+  list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--nav-gap);
   position:fixed;right:20px;top:50%;transform:translateY(-50%);
-  background:var(--card);border-radius:14px;padding:14px;box-shadow:var(--shadow);min-width:160px;
-  z-index:60;
+  background:var(--card);border-radius:16px;padding:16px 12px;box-shadow:var(--shadow);min-width:180px;
+  z-index:60;border:1px solid var(--border);
 }
+
+/* Navigation list items */
 .nav-list li{margin:0}
+
+/* Navigation links with hover effects */
 .nav-list a{
-  display:block;padding:10px 14px;border-radius:10px;color:#111;font-weight:600;
-  background:transparent;border:1px solid transparent;
+  display:block;padding:12px 16px;border-radius:10px;color:var(--text-secondary);font-weight:600;font-size:0.95rem;
+  background:transparent;border:1px solid transparent;transition:all 0.2s ease;
 }
+
+/* Navigation link hover and focus states */
 .nav-list a:hover,
 .nav-list a:focus{
-  background:linear-gradient(90deg, rgba(11,95,255,0.08), rgba(11,95,255,0.04));
-  border-color:rgba(11,95,255,0.12);outline:none;
+  color:var(--accent);background:rgba(255,0,110,0.1);border-color:var(--border);outline:none;
 }
 
-/* Page sections */
-.section{background:var(--card);border-radius:12px;padding:28px;margin-bottom:20px;box-shadow:var(--shadow)}
-.section h2{margin-top:0}
-.projects-list{padding-left:1rem;margin:0}
-.projects-list li{margin:10px 0;color:var(--muted)}
+/* ============================================
+   PAGE SECTIONS - Main content boxes
+   ============================================ */
+.section{
+  background:var(--card);border-radius:var(--radius);padding:40px;margin-bottom:24px;
+  box-shadow:var(--shadow);border:1px solid var(--border);transition:all 0.3s ease;
+}
 
-/* Contact form */
-.contact-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
-.contact-form label{display:block}
+/* Section hover effect - elevates and changes background */
+.section:hover{
+  box-shadow:var(--shadow-lg);background:var(--card-hover);
+}
+
+/* Section headings */
+.section h2{
+  margin:0 0 20px 0;font-size:1.8rem;font-weight:700;color:var(--text-primary);
+  position:relative;padding-bottom:16px;
+}
+
+/* Animated underline for section headings */
+.section h2::after{
+  content:'';position:absolute;bottom:0;left:0;width:60px;height:3px;
+  background:linear-gradient(90deg, #ff006e 0%, #ff3385 100%);border-radius:2px;
+}
+
+/* Section paragraphs */
+.section p{color:var(--text-secondary);line-height:1.8;margin:0 0 16px 0}
+.section p:last-child{margin-bottom:0}
+
+/* ============================================
+   PROJECTS SECTION - Project showcase grid
+   ============================================ */
+.projects-list{
+  list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;
+}
+
+/* Individual project item layout - image and text side by side */
+.project-item{
+  display:grid;grid-template-columns:320px 1fr;gap:24px;align-items:start;
+  padding:0;border:none;background:transparent;border-left:none;
+  list-style:none;transition:all 0.3s ease;
+}
+
+/* Project images with rounded corners and border */
+.project-image{
+  width:100%;height:auto;border-radius:10px;box-shadow:var(--shadow);
+  object-fit:cover;aspect-ratio:16/10;transition:transform 0.3s ease;
+  border:1px solid var(--border);
+}
+
+/* Project image zoom on hover */
+.project-item:hover .project-image{transform:scale(1.04)}
+
+/* Project content layout */
+.project-content{display:flex;flex-direction:column;gap:12px}
+.project-content strong{font-size:1.1rem;color:var(--text-primary)}
+.project-content p{margin:0;color:var(--text-secondary)}
+
+/* ============================================
+   SKILLS SECTION - Grid of skill boxes
+   ============================================ */
+.skills-grid{
+  display:grid;grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));gap:16px;margin-top:20px;
+}
+
+/* Individual skill box with gradient background */
+.skill-box{
+  background:linear-gradient(135deg, rgba(255,0,110,0.06) 0%, rgba(255,0,110,0.02) 100%);
+  border:1.5px solid var(--border);border-radius:12px;padding:20px;
+  text-align:center;transition:all 0.3s ease;cursor:default;
+}
+
+/* Skill box hover effect - lifts up and highlights */
+.skill-box:hover{
+  border-color:var(--accent);background:linear-gradient(135deg, rgba(255,0,110,0.12) 0%, rgba(255,0,110,0.06) 100%);
+  transform:translateY(-4px);box-shadow:var(--shadow);
+}
+
+/* Skill icon emoji styling */
+.skill-icon{
+  font-size:2rem;display:block;margin-bottom:12px;
+}
+
+/* Skill title */
+.skill-box h3{
+  margin:0 0 6px 0;font-size:1.1rem;color:var(--text-primary);font-weight:700;
+}
+
+/* Skill description */
+.skill-box p{
+  margin:0;font-size:0.85rem;color:var(--text-secondary);
+}
+
+/* ============================================
+   CONTACT FORM - Two column form layout
+   ============================================ */
+.contact-form{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;
+}
+
+/* Form label */
+.contact-form label{display:flex;flex-direction:column;gap:6px}
+
+/* Form inputs and textareas */
 .contact-form input,
 .contact-form textarea{
-  width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;background:transparent;color:#111;font-size:0.95rem;
+  width:100%;padding:12px 14px;border-radius:10px;
+  border:1.5px solid var(--border);background:rgba(255,0,110,0.02);color:var(--text-primary);
+  font-size:0.95rem;font-family:inherit;transition:all 0.2s ease;
 }
-.contact-form textarea{grid-column:1/-1;resize:vertical;min-height:120px}
+
+/* Form inputs focus state with pink highlight */
+.contact-form input:focus,
+.contact-form textarea:focus{
+  outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,0,110,0.15);background:rgba(255,0,110,0.04);
+}
+
+/* Form placeholders */
+.contact-form input::placeholder,
+.contact-form textarea::placeholder{color:var(--text-secondary)}
+
+/* Textarea spans full width */
+.contact-form textarea{
+  grid-column:1/-1;resize:vertical;min-height:120px;
+}
+
+/* Submit button with gradient and shadow */
 .contact-form button{
-  grid-column:1/-1;justify-self:start;padding:10px 16px;border-radius:10px;border:0;background:var(--accent);color:#fff;font-weight:700;cursor:pointer;
-  box-shadow:0 6px 20px rgba(11,95,255,0.16);
+  grid-column:1/-1;justify-self:start;padding:12px 24px;border-radius:10px;border:0;
+  background:linear-gradient(135deg, #ff006e 0%, #c2185b 100%);
+  color:#fff;font-weight:700;cursor:pointer;font-size:0.95rem;
+  box-shadow:var(--shadow-sm);transition:all 0.2s ease;
 }
 
-/* Footer */
-.site-footer{padding:24px 0;text-align:center;color:var(--muted);font-size:0.9rem}
+/* Button hover effect - lifts up */
+.contact-form button:hover{
+  transform:translateY(-2px);box-shadow:var(--shadow);
+}
 
-/* Accessibility helper */
+/* Button press effect - returns to normal */
+.contact-form button:active{transform:translateY(0)}
+
+/* ============================================
+   FOOTER - Bottom page section
+   ============================================ */
+.site-footer{
+  padding:32px 0;text-align:center;color:var(--text-secondary);font-size:0.9rem;
+  border-top:1px solid var(--border);margin-top:40px;
+}
+
+/* ============================================
+   ACCESSIBILITY - Helper classes
+   ============================================ */
 .visually-hidden{position:absolute !important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
 
-/* Responsive: collapse nav to top on small screens */
+/* ============================================
+   RESPONSIVE DESIGN - Tablet/Medium screens (880px and below)
+   ============================================ */
 @media (max-width:880px){
+  /* Move navigation from fixed side to top bar */
   .nav-list{
-    position:fixed;right:0;left:0;top:0;transform:none;border-radius:0;display:flex;flex-direction:row;justify-content:center;
-    padding:8px 12px;gap:10px;min-width:unset;
+    position:relative;right:auto;left:auto;top:auto;transform:none;
+    display:flex;flex-direction:row;justify-content:center;
+    padding:10px;gap:8px;min-width:unset;flex-wrap:wrap;
   }
-  body{padding-top:64px} /* avoid content under top nav */
-  .header-inner{justify-content:flex-start}
-  .contact-form{grid-template-columns:1fr; }
+  .nav-list a{padding:8px 12px;font-size:0.9rem}
+  
+  /* Stack header content vertically */
+  .header-inner{flex-direction:column;text-align:center}
+  
+  /* Adjust section padding */
+  .section{padding:28px}
+  
+  /* Single column form on smaller screens */
+  .contact-form{grid-template-columns:1fr}
+  
+  /* Stack project image and text vertically */
+  .project-item{grid-template-columns:1fr}
+  .project-image{aspect-ratio:16/9}
+  
+  /* Smaller skill boxes */
+  .skills-grid{grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));gap:12px}
+  .skill-box{padding:16px}
+  .skill-icon{font-size:1.6rem}
 }
 
-/* Very small screens: make nav compact */
+/* ============================================
+   RESPONSIVE DESIGN - Mobile/Small screens (420px and below)
+   ============================================ */
 @media (max-width:420px){
-  .nav-list a{padding:8px 10px;font-size:0.95rem}
+  /* Reduce title size on mobile */
+  .site-title{font-size:1.4rem}
+  
+  /* Reduce section padding and margins */
+  .section{padding:20px;margin-bottom:16px}
+  .section h2{font-size:1.4rem}
+  
+  /* Compact navigation */
+  .nav-list{padding:8px}
+  .nav-list a{padding:6px 10px;font-size:0.85rem}
+  
+  /* Reduce container padding */
   .container{padding:20px 12px}
 }
