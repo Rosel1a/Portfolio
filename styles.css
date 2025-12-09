@@ -184,7 +184,7 @@ a:hover{color:#ff3385}
 }
 
 /* Project image zoom on hover */
-.project-item:hover .project-image{transform:scale(1.04)}
+.project-item:hover .project-image{transform:scale(1.02)} /* smaller zoom */
 
 /* Project content layout */
 .project-content{display:flex;flex-direction:column;gap:12px}
